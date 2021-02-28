@@ -1,18 +1,16 @@
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
+import 'firebase/storage'
+import config from './../firebaseConfig.json'
 
 if (!firebase.apps.length) {
-  firebase.initializeApp(
-    {
-      apiKey: "AIzaSyCpYL-M5PChOxt2UQG4p8hRj7f3cxqZYeo",
-      authDomain: "training-b5a9b.firebaseapp.com",
-      databaseURL: "https://training.firebaseio.com",
-      projectId: "training-b5a9b",
-      storageBucket: "training-b5a9b.appspot.com",
-      messagingSenderId: "122874744969",
-      appId: "1:122874744969:web:3eff831aedcd1474dbb658",
-      measurementId: "G-6BPWNTJ6HZ"
-    }
-  )
+  firebase.initializeApp({ ...config })
 }
 
-export default firebase
+export default ({ app }, inject) => {
+  inject('firebase', firebase)
+  inject('firestore', firebase.firestore())
+  inject('fireAuth', firebase.auth())
+  inject('fireStorage', firebase.storage())
+}
