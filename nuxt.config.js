@@ -1,49 +1,61 @@
 export default {
-  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
-
-  // Global page headers: https://go.nuxtjs.dev/config-head
+  mode: "spa",
+  /*
+   ** Headers of the page
+   */
   head: {
-    title: 'training',
-    htmlAttrs: {
-      lang: 'en'
-    },
+    title: process.env.npm_package_name || "",
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        hid: "description",
+        name: "description",
+        content: process.env.npm_package_description || ""
+      }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/icon?family=Material+Icons"
+      }
     ]
   },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+  /*
+   ** Customize the progress-bar color
+   */
+  loading: { color: "#fff" },
+  /*
+   ** Global CSS
+   */
+  css: ["~/assets/css/tailwind.css"],
+  /*
+   ** Plugins to load before mounting the App
+   */
   plugins: [
+    "~/plugins/firebase", "~/plugins/auth",
+    '~/plugins/user',
   ],
-
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+  /*
+   ** Nuxt.js dev-modules
+   */
   buildModules: [
+    // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
+    "@nuxtjs/tailwindcss",
   ],
-
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
-    '@nuxtjs/vuetify',
-  ],
-
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
+  /*
+   ** Nuxt.js modules
+   */
+  modules: ["@nuxtjs/axios", "@nuxtjs/vuetify"],
+  /*
+   ** Build configuration
+   */
   build: {
+    /*
+     ** You can extend webpack config here
+     */
   }
-}
+};
