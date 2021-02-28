@@ -1,39 +1,38 @@
-import firebase from '~/plugins/firebase'
+import VueTextareaAutosize from 'vue-textarea-autosize';
+import Vue from 'vue';
+
+Vue.use(VueTextareaAutosize);
+
 
 export const state = () => ({
-  userUid: '',
-  userName: '',
-})
-
-export const mutations = {
-  setUserUid(state,userUid) {
-    state.userUid = userUid
-  },
-  setUserName(state,userName) {
-    state.userName = userName
+  user: {
+    login: false
   }
-}
-
-export const actions = {
-  login({ commit }) {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-      const user = result.user;
-      console.log('success : ' + user.uid + ' : ' + user.displayName)
-      commit('setUserUid', user.uid)
-      commit('setUserName', user.displayName)
-    }).catch(function(error) {
-      let errorCode = error.code;
-      console.log('error : ' + errorCode)
-    });
-  }
-}
+});
 
 export const getters = {
-  getUserUid(state) {
-    return state.userUid
-  },
-  getUserName(state) {
-    return state.userName
+  user: state => {
+    return state.user;
   }
-}
+};
+
+export const actions = {
+  logout({ commit }) {
+    this.$fireAuth
+      .signOut()
+      .then(() => {
+        console.log("ログアウト");
+        commit("logOut");
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    }
+};
+
+export const mutations = {
+  logOut(state) {
+    state.user = "";
+  }
+};
+
