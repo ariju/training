@@ -47,6 +47,11 @@
           <v-container>
             <v-form @submit.prevent="addEvent">
               <v-text-field
+                v-model="image"
+                type="image"
+                label="phone"
+              ></v-text-field>
+              <v-text-field
                 v-model="name"
                 type="text"
                 label="event name (required)"
@@ -88,6 +93,11 @@
         <v-card>
           <v-container>
             <v-form @submit.prevent="addEvent">
+              <v-text-field
+                v-model="image"
+                type="image"
+                label="phone"
+              ></v-text-field>
               <v-text-field
                 v-model="name"
                 type="text"
