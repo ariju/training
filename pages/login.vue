@@ -1,32 +1,41 @@
 <template>
-  <div class="flex justify-center">
-    <div
-      class="flex items-center flex-col h-48 mt-20 w-4/5 p-4 bg-white shadow rounded"
-    >
-      <div class="w-full border-b pb-2 mb-10">
-        <p class="text-center">ログイン</p>
-      </div>
-      <form class="w-full" @submit.prevent="onSubmit">
-        <button
-          type="submit"
-          class="w-full bg-google py-3 px-10 text-white rounded focus:outline-none focus:shadow-outline border"
-        >
-          Google でログイン
-        </button>
-      </form>
-    </div>
-  </div>
+  <v-app>
+    <v-main>
+      <v-container class="fill-height" fluid>
+        <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="4">
+            <v-card class="elevation-12">
+              <v-toolbar color="primary" dark flat>
+                <v-toolbar-title>Login form </v-toolbar-title>
+                <v-spacer />
+              </v-toolbar>
+              <v-card-title>
+                <h1 class="display-1">ログイン</h1>
+              </v-card-title>
+              <v-card-text>
+                <v-form class="w-full" @submit.prevent="onSubmit">
+                  <v-btn type="submit" class="info">
+                    Google でログイン
+                  </v-btn>
+                </v-form>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
 export default {
-  middleware: ['checkLogin'],
+  middleware: ["checkLogin"],
   methods: {
     onSubmit() {
-      const provider = new this.$firebase.auth.GoogleAuthProvider()
-      this.$fireAuth.signInWithRedirect(provider)
+      const provider = new this.$firebase.auth.GoogleAuthProvider();
+      this.$fireAuth.signInWithRedirect(provider);
+      console.log('ログイン')
     }
   }
-}
+};
 </script>
-
