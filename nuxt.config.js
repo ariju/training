@@ -1,5 +1,4 @@
 export default {
-  mode: "spa",
   /*
    ** Headers of the page
    */
@@ -14,13 +13,7 @@ export default {
         content: process.env.npm_package_description || ""
       }
     ],
-    link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/icon?family=Material+Icons"
-      }
-    ]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
   /*
    ** Customize the progress-bar color
@@ -29,13 +22,12 @@ export default {
   /*
    ** Global CSS
    */
-  css: ["~/assets/css/tailwind.css"],
+  css: [],
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
-    "~/plugins/firebase", "~/plugins/auth",
-    '~/plugins/user',
+    "~/plugins/firebase",
   ],
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -44,7 +36,6 @@ export default {
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    "@nuxtjs/tailwindcss",
   ],
   /*
    ** Nuxt.js modules
@@ -54,8 +45,15 @@ export default {
    ** Build configuration
    */
   build: {
+    extend (config, { isDev, isClient }) {
+      config.module.rules.push({
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        use: 'file-loader',
+        exclude: /(node_modules)/
+      });
+    }
     /*
      ** You can extend webpack config here
      */
-  }
+  },
 };

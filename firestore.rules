@@ -1,36 +1,8 @@
 rules_version = '2';
-
 service cloud.firestore {
-    match /databases/{database}/documents {
-
-        // 何らかの認証が済んでいるisAuthenticatedログインが済んでいること
-        function isAuthenticated() { // 条件 1
-            return request.auth != null;
-        }
-        // isUserAuthenticated（「ユーザー ID も含めて、適切な者であるという認可」
-        function isUserAuthenticated(userId) { // 条件 1 かつ 条件 2
-            return isAuthenticated() && userId == request.auth.uid;
-        }
-
-        // ルールの記述
-        match /users/{userId} {
-            // ユーザー情報の取得のルール
-            allow get: if isUserAuthenticated(userId); // 条件 1 かつ 条件 2
-        }
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
     }
+  }
 }
-// allow <許可する読み書きのオペレーション>: if <許可する条件>;
-// match /<対象のコレクション・ドキュメントへのパス> {
-// }ルールは、read (get, list に分類される）
-// と write (create, update, delete に分類される
-// request.auth：ユーザーの認証情報に関する値が参照できる
-// request.resource.data：クライアントから送られてくるフィールドとその値が参照できる
-// resource.data：ドキュメントに格納されているフィールドとその値が参照できる
-// read
-// get：単一のドキュメントの取得
-// list：クエリによるコレクション・複数ドキュメントの取得
-// write
-// create：ドキュメントの生成
-// update：ドキュメントの一部のフィールドの更新
-// delete：ドキュメントの削除
-// スキーマ検証とは、読み書きするデータの構造や種類に関する検証のことです。
