@@ -4,5 +4,9 @@ service cloud.firestore {
     match /{document=**} {
       allow read, write: if false;
     }
+
+    match /{path=**}/items/{itemId} {
+      allow read: if resource.data.ownerId == request.auth.uid;
+    }
   }
 }

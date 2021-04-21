@@ -1,7 +1,13 @@
 <template>
   <v-app>
     <v-main>
-      <Bmi />
+      <v-container>
+        <v-row>
+          <v-col align="center" justify="center">
+            <Bmi />
+          </v-col>
+        </v-row>
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -10,12 +16,9 @@
 import Bmi from "~/components/Bmi";
 
 export default {
-  name: "App",
+  layout: "toppage",
   components: {
     Bmi
   },
-  data() {
-    return {};
-  }
 };
 </script>

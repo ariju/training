@@ -1,19 +1,18 @@
 <template>
   <v-app>
     <v-main>
-      <Calendar />
+      <Management />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Calendar from "~/components/Calendar";
+import Management from "~/components/Management";
 
 export default {
-  layout: "toppage",
   name: "App",
   components: {
-    Calendar
+    Management
   },
   data() {
     return {};

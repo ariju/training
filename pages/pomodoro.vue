@@ -21,6 +21,7 @@
 import Pomodoro from "~/components/Pomodoro";
 
 export default {
+  layout: "toppage",
   name: "App",
 
   components: {

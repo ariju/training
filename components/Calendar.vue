@@ -47,19 +47,14 @@
           <v-container>
             <v-form @submit.prevent="addEvent">
               <v-text-field
-                v-model="image"
-                type="image"
-                label="phone"
-              ></v-text-field>
-              <v-text-field
                 v-model="name"
                 type="text"
-                label="event name (required)"
+                label="トレーニングした部位"
               ></v-text-field>
               <v-text-field
                 v-model="details"
                 type="text"
-                label="detail"
+                label="トレーニング内容"
               ></v-text-field>
               <v-text-field
                 v-model="start"
@@ -94,19 +89,14 @@
           <v-container>
             <v-form @submit.prevent="addEvent">
               <v-text-field
-                v-model="image"
-                type="image"
-                label="phone"
-              ></v-text-field>
-              <v-text-field
                 v-model="name"
                 type="text"
-                label="event name (required)"
+                label="トレーニングした部位"
               ></v-text-field>
               <v-text-field
                 v-model="details"
                 type="text"
-                label="detail"
+                label="トレーニング内容"
               ></v-text-field>
               <v-text-field
                 v-model="start"
@@ -151,6 +141,8 @@
           @click:date="setDialogDate"
           @change="updateRange"
         ></v-calendar>
+
+        <!-- イベント詳細カード -->
         <v-menu
           v-model="selectedOpen"
           :close-on-content-click="false"
@@ -225,7 +217,7 @@ export default {
     details: null,
     start: null,
     end: null,
-    color: "#1976D2", // default event color
+    color: "#FF0000", // default event color
     currentlyEditing: null,
     selectedEvent: {},
     selectedElement: null,
@@ -279,6 +271,7 @@ export default {
         events.push(appData);
       });
       this.events = events;
+      console.log(this.events);
     },
     setDialogDate({ date }) {
       this.dialogDate = true;
@@ -307,14 +300,14 @@ export default {
           details: this.details,
           start: this.start,
           end: this.end,
-          color: this.color
+          color: this.color,
         });
         this.getEvents();
         (this.name = ""),
           (this.details = ""),
           (this.start = ""),
           (this.end = ""),
-          (this.color = "");
+          (this.color = "")
       } else {
         alert("You must enter event name, start, and end time");
       }

@@ -1,7 +1,6 @@
 export default ({ app, redirect }, inject) => {
   inject("user", async () => {
     const auth = await app.$auth();
-
     if (!auth) {
       redirect("/login");
     }

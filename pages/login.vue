@@ -29,13 +29,21 @@
 
 <script>
 export default {
-  middleware: ["checkLogin"],
   methods: {
     onSubmit() {
       const provider = new this.$firebase.auth.GoogleAuthProvider();
-      this.$fireAuth.signInWithRedirect(provider);
-      console.log('ログイン')
+      this.$fireAuth.signInWithRedirect(provider)
     }
+  },
+  mounted() {
+    this.$fireAuth.onAuthStateChanged(user => {
+      if (user) {
+        // ログイン後のページに遷移する
+        this.$router.push('/')
+      } else {
+        // ログイン失敗。エラー処理など(通常はあり得ない？)
+      }
+    })
   }
 };
 </script>
